@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ChatMe</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="my_account">My Account</string>
+    <string name="people">People</string>
+    <string name="sign_in_continue">SIGN IN &amp; CONTINUE</string>
+    <string name="name">name</string>
+    <string name="bio">bio</string>
+</resources>

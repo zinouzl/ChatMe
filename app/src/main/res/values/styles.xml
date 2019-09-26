@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- base set of styles that apply to all versions -->
+<style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+</style>
+
+
+    <!-- declare the theme name that's actually applied in the manifest file -->
+<style name="AppTheme" parent="BaseAppTheme" />
+
+<style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+    <item name="android:windowBackground">
+        @drawable/background_1
+    </item>
+</style>
+
+</resources>

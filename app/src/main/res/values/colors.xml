@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#234353</color>
+    <color name="colorPrimaryDark">#006699</color>
+    <color name="colorPrimaryAccent">#ff80bf</color>
+    <color name="white">#ffffff</color>
+
+</resources>
+
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in com!-->
+
