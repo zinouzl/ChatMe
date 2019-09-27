@@ -1,7 +1,7 @@
 package com.example.sony.chatme.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sony.chatme.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.startActivity
