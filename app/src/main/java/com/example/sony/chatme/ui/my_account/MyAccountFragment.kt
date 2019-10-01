@@ -16,6 +16,7 @@ import com.example.sony.chatme.ui.SignInActivity
 import com.example.sony.chatme.util.FirebaseUtil
 import com.example.sony.chatme.util.StorageUtil
 import com.firebase.ui.auth.AuthUI
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_my_account.*
 import kotlinx.android.synthetic.main.fragment_my_account.view.*
 import org.jetbrains.anko.clearTask
@@ -72,6 +73,7 @@ class MyAccountFragment : Fragment() {
                     )
 
                 }
+                Snackbar.make(root,"Saving Data to Cloud",Snackbar.LENGTH_SHORT).show()
 
 
             }

@@ -8,4 +8,6 @@
     <string name="sign_in_continue">SIGN IN &amp; CONTINUE</string>
     <string name="name">name</string>
     <string name="bio">bio</string>
+    <string name="person_icon">person_icon</string>
+    <string name="this_is_the_bio">this is the bio</string>
 </resources>

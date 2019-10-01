@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="70dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:focusable="true"
+    android:clickable="true"
+
+    app:cardElevation="4dp"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_frame"
+        >
+
+        <ImageView
+            android:id="@+id/person_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/ic_account_round"
+            android:paddingStart="10dp"
+
+            android:contentDescription="@string/person_icon"/>
+        <TextView
+            android:id="@+id/person_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/background_dark"
+            android:text="@string/name"
+            android:paddingStart="20dp"
+            android:layout_toEndOf="@id/person_icon"
+            />
+
+        <TextView
+            android:id="@+id/person_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/person_icon"
+            android:layout_below="@id/person_name"
+            android:paddingStart="20dp"
+            android:paddingTop="5dp"
+            android:text="@string/this_is_the_bio"/>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
