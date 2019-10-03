@@ -67,7 +67,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/button_save"
         app:layout_constraintTop_toBottomOf="@+id/edit_bio"
-         />
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_save"

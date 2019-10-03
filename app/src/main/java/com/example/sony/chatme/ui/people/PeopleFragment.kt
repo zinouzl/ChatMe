@@ -10,14 +10,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sony.chatme.AppConstants
 import com.example.sony.chatme.R
+import com.example.sony.chatme.recyclerview.item.PersonItem
+import com.example.sony.chatme.ui.chat.ChatActivity
 import com.example.sony.chatme.util.FirebaseUtil
 import com.google.firebase.firestore.ListenerRegistration
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_people.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class PeopleFragment : Fragment() {
 
@@ -58,20 +63,35 @@ class PeopleFragment : Fragment() {
 
                     peopleSection = Section(items)
                     add(peopleSection)
+                    setOnItemClickListener(onItemClicked)
                 }
             }
             shouldInitRecuclerView = false
 
         }
 
-        fun updateItems(){
+        fun updateItems() = peopleSection.update(items)
 
-        }
+
 
         if (shouldInitRecuclerView)
             init()
         else
             updateItems()
+
+
+    }
+
+    private val onItemClicked = OnItemClickListener{item,view ->
+
+        if(item is PersonItem){
+
+            startActivity<ChatActivity>(
+                AppConstants.USER_ID to item.userId,
+                AppConstants.USER_NAME to item.person.userName)
+
+
+        }
 
 
     }
