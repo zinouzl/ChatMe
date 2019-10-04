@@ -3,10 +3,7 @@ package com.example.sony.chatme.util
 
 import android.content.Context
 import android.util.Log
-import com.example.sony.chatme.model.ChatChannel
-import com.example.sony.chatme.model.MessageType
-import com.example.sony.chatme.model.TextMessage
-import com.example.sony.chatme.model.User
+import com.example.sony.chatme.model.*
 import com.example.sony.chatme.recyclerview.item.PersonItem
 import com.example.sony.chatme.recyclerview.item.TextMessageItem
 import com.google.firebase.auth.FirebaseAuth
@@ -122,7 +119,7 @@ object FirebaseUtil {
                 }
                 val items = mutableListOf<Item>()
                 querySnapshot?.documents?.forEach{
-                    if (it["type"] == MessageType.TEXT)
+                    if (it["dataType"] == MessageType.TEXT)
                         items.add(TextMessageItem(it.toObject(TextMessage::class.java)!!,context))
                     else
                         TODO("handle image sending")
@@ -130,5 +127,12 @@ object FirebaseUtil {
                 }
                 onListen(items)
             }
+    }
+
+
+    fun sendMessage(message:Message,chanelid:String){
+        chatChannelCollectionRef.document(chanelid)
+            .collection("messages")
+            .add(message)
     }
 }

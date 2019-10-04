@@ -1,7 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/message_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@drawable/rect_round_primary_color">
+
+        <TextView
+            android:id="@+id/message_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="250dp"
+            android:minWidth="120dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="4dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="@string/lorem_ipsum"
+            />
+        <TextView
+            android:id="@+id/date_textView"
+            android:layout_below="@id/message_textView"
+            android:layout_alignEnd="@id/message_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textSize="12sp"
+            android:gravity="end"
+            android:textColor="	#DCDCDC"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:text="15/03/1993 6:00 PM"
+            />
+
+
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>
