@@ -27,5 +27,16 @@ object StorageUtil {
             }
     }
 
+
+    fun uploadSendPictures(imagebyteArray: ByteArray,
+                           onSuccess: (imagePath: String) -> Unit) {
+        val ref = currentUserRef.child("messages/${UUID.nameUUIDFromBytes(imagebyteArray)}")
+        ref.putBytes(imagebyteArray)
+                .addOnSuccessListener {
+                    onSuccess(ref.path)
+                }
+    }
+
+
     fun pathToReference(path:String) = storageInstance.getReference(path)
 }

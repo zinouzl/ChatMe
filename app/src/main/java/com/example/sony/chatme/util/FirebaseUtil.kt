@@ -4,6 +4,7 @@ package com.example.sony.chatme.util
 import android.content.Context
 import android.util.Log
 import com.example.sony.chatme.model.*
+import com.example.sony.chatme.recyclerview.item.ImageMessageItem
 import com.example.sony.chatme.recyclerview.item.PersonItem
 import com.example.sony.chatme.recyclerview.item.TextMessageItem
 import com.google.firebase.auth.FirebaseAuth
@@ -122,7 +123,8 @@ object FirebaseUtil {
                     if (it["dataType"] == MessageType.TEXT)
                         items.add(TextMessageItem(it.toObject(TextMessage::class.java)!!,context))
                     else
-                        TODO("handle image sending")
+                        items.add(ImageMessageItem(it.toObject(ImageMessage::class.java)!!, context))
+
 
                 }
                 onListen(items)

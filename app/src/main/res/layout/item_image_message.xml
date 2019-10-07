@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp">
+
+    <RelativeLayout
+        android:id="@+id/message_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@drawable/rect_round_primary_color">
+
+        <ImageView
+            android:id="@+id/message_imageView"
+            android:layout_width="250dp"
+
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:paddingEnd="8dp"
+            android:paddingStart="4dp"
+
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:src="@drawable/background_1"
+
+            />
+
+        <TextView
+            android:id="@+id/date_textView"
+            android:layout_below="@id/message_imageView"
+            android:layout_alignEnd="@id/message_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textSize="12sp"
+            android:gravity="end"
+            android:textColor="	#DCDCDC"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:text="@string/date" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>
