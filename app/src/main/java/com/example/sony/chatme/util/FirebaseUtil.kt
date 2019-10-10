@@ -33,7 +33,8 @@ object FirebaseUtil {
                 val newUser = User(
                     FirebaseAuth.getInstance().currentUser?.displayName ?: "",
                     "",
-                    null
+                    null,
+                    mutableListOf()
                 )
                 currentUserDocRef.set(newUser).addOnSuccessListener {
                     onComplet()
@@ -137,4 +138,24 @@ object FirebaseUtil {
             .collection("messages")
             .add(message)
     }
+
+
+    //FCM
+    fun getFCMRegistrationTokens(onComplet: (tokens: MutableList<String>) -> Unit) {
+        currentUserDocRef.get().addOnSuccessListener {
+            val user = it.toObject(User::class.java)!!
+            onComplet(user.registrationtokens)
+        }
+
+
+    }
+
+    fun setFCMRegistrationTokens(tokens: MutableList<String>) {
+        currentUserDocRef.update(mapOf("registrationtokens" to tokens))
+    }
+
+
+    //endFCM
+
+
 }

@@ -64,6 +64,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
 
     //glide

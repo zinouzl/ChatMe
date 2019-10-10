@@ -6,8 +6,6 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.LinearLayout
-import androidx.navigation.ActivityNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sony.chatme.AppConstants
 import com.example.sony.chatme.R
@@ -16,6 +14,7 @@ import com.example.sony.chatme.model.MessageType
 import com.example.sony.chatme.model.TextMessage
 import com.example.sony.chatme.util.FirebaseUtil
 import com.example.sony.chatme.util.StorageUtil
+import com.example.sony.chatme.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ListenerRegistration
 import com.xwray.groupie.GroupAdapter
@@ -23,7 +22,6 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.activity_chat.*
-import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -31,6 +29,8 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var currentChannelId: String
     private lateinit var messegeListenerRegistration: ListenerRegistration
     private var shouldInitRecyclerView = true
+    private lateinit var currentUser: User
+    private lateinit var otherUserId: String
     private val RC_SEND_IMAGE = 3
     private lateinit var messageSection: Section
 
@@ -41,17 +41,28 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = intent.getStringExtra(AppConstants.USER_NAME)
 
-        val otherUserId = intent.getStringExtra(AppConstants.USER_ID)
+
+        FirebaseUtil.getCurrentUser {
+            currentUser = it
+        }
+
+        otherUserId = intent.getStringExtra(AppConstants.USER_ID)
 
         FirebaseUtil.getOrCreateChatChannel(otherUserId){channelId ->
             currentChannelId = channelId
             messegeListenerRegistration = FirebaseUtil.addChatMessagesListener(channelId,this,this::updateMessages)
 
             imageView_send.setOnClickListener{
-                val messagetosend = TextMessage(write_text.text.toString(),Calendar.getInstance().time,
-                        FirebaseAuth.getInstance().currentUser!!.uid, MessageType.TEXT)
+                val messageToSend = TextMessage(
+                    write_text.text.toString(),
+                    Calendar.getInstance().time,
+                    FirebaseAuth.getInstance().currentUser!!.uid,
+                    otherUserId,
+                    currentUser.userName,
+                    MessageType.TEXT
+                )
                 write_text.setText("")
-                FirebaseUtil.sendMessage(messagetosend,channelId)
+                FirebaseUtil.sendMessage(messageToSend, channelId)
             }
 
             select_image.setOnClickListener{
@@ -82,7 +93,13 @@ class ChatActivity : AppCompatActivity() {
             val selectedImageBytes = outputStream.toByteArray()
 
             StorageUtil.uploadSendPictures(selectedImageBytes) {
-                val message = ImageMessage(it, Calendar.getInstance().time, FirebaseAuth.getInstance().currentUser!!.uid)
+                val message = ImageMessage(
+                    it,
+                    Calendar.getInstance().time,
+                    FirebaseAuth.getInstance().currentUser!!.uid,
+                    otherUserId,
+                    currentUser.userName
+                )
                 FirebaseUtil.sendMessage(message, currentChannelId)
             }
 
