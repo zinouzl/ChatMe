@@ -3,18 +3,18 @@ package com.example.sony.chatme.ui.chat
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sony.chatme.AppConstants
 import com.example.sony.chatme.R
 import com.example.sony.chatme.model.ImageMessage
 import com.example.sony.chatme.model.MessageType
 import com.example.sony.chatme.model.TextMessage
+import com.example.sony.chatme.model.User
 import com.example.sony.chatme.util.FirebaseUtil
 import com.example.sony.chatme.util.StorageUtil
-import com.example.sony.chatme.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ListenerRegistration
 import com.xwray.groupie.GroupAdapter
@@ -32,6 +32,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var currentUser: User
     private lateinit var otherUserId: String
     private val RC_SEND_IMAGE = 3
+    private var messageItemSize = 0
     private lateinit var messageSection: Section
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +63,7 @@ class ChatActivity : AppCompatActivity() {
                     MessageType.TEXT
                 )
                 write_text.setText("")
-                FirebaseUtil.sendMessage(messageToSend, channelId)
+                FirebaseUtil.sendMessage(messageToSend, otherUserId, channelId)
             }
 
             select_image.setOnClickListener{
@@ -100,7 +101,7 @@ class ChatActivity : AppCompatActivity() {
                     otherUserId,
                     currentUser.userName
                 )
-                FirebaseUtil.sendMessage(message, currentChannelId)
+                FirebaseUtil.sendMessage(message, otherUserId, currentChannelId)
             }
 
 
@@ -132,11 +133,20 @@ class ChatActivity : AppCompatActivity() {
             init()
         else
             updateItems()
-
+        messageItemSize = messages.size
         recycler_view_messages.scrollToPosition(recycler_view_messages.adapter?.itemCount!!.minus(1))
 
 
+    }
+
+    override fun onDestroy() {
+
+        if (messageItemSize == 0)
+
+            FirebaseUtil.deleteChatChannel(currentChannelId, otherUserId)
 
 
+
+        super.onDestroy()
     }
 }
